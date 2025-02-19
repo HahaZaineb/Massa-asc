@@ -15,7 +15,7 @@ export function scheduleExecution(_: StaticArray<u8>): void {
     const validityEndPeriod = validityStartPeriod;
     const validityEndThread = 31 as u8;
 
-    const maxGas = 500_000_000; // gas for smart contract execution
+    const maxGas = 500_000_000; 
     const rawFee = 200_000;
     const coins = 0;
 
@@ -31,9 +31,7 @@ export function scheduleExecution(_: StaticArray<u8>): void {
         rawFee,
         coins,
         [],
-      );
-      generateEvent(
-        `next update planned on period ${validityStartPeriod.toString()} thread: ${validityStartThread.toString()}`,
+    
       );
 
 }
