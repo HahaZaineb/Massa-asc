@@ -4,7 +4,7 @@ import 'dotenv/config';
 async function main() {
     const account = await Account.fromEnv();
     const provider = JsonRpcProvider.buildnet(account);
-    const contractAddress = 'AS12C66vXH78jQC9N31XAEkWW4rYANqekRqDkePVf1MN49ics9SnC'; 
+    const contractAddress = 'AS1cTbLw8kCjAZxqvbQ1vpYVEvQtpLzubdaUiouVvCY8i6LEPJw8'; 
     const contract = new SmartContract(provider, contractAddress);
     const balance = await provider.balance();
     console.log('Balance:', balance);

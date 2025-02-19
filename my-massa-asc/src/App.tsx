@@ -4,7 +4,7 @@ import { MassaLogo } from "@massalabs/react-ui-kit";
 import './App.css';
 
 
-const sc_addr = "AS12C66vXH78jQC9N31XAEkWW4rYANqekRqDkePVf1MN49ics9SnC"; 
+const sc_addr = "AS1cTbLw8kCjAZxqvbQ1vpYVEvQtpLzubdaUiouVvCY8i6LEPJw8"; 
 
 function App() {
   const [status, setStatus] = useState<string>("Waiting...");
