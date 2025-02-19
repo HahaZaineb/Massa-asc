@@ -48,7 +48,7 @@
         "node": ">=16"
     },
     "dependencies": {
-        "ts-node": "^10.9.1",
-        "ts-node/esm": "https://github.com/ts-node/ts-node.git#esm"
+        "ts-node": "^10.9.1"
+        
     }
 }
