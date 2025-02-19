@@ -4,7 +4,7 @@ import { MassaLogo } from "@massalabs/react-ui-kit";
 import './App.css';
 
 
-const sc_addr = "AS1TZbupC4Dcx3EkXhU8EVhNhzgRbtP1ZYR6tvA5ocKnmwkgUJq"; 
+const sc_addr = "AS12C66vXH78jQC9N31XAEkWW4rYANqekRqDkePVf1MN49ics9SnC"; 
 
 function App() {
   const [status, setStatus] = useState<string>("Waiting...");
@@ -12,7 +12,11 @@ function App() {
   const client = JsonRPCClient.buildnet();
 
   useEffect(() => {
-    checkExecution();
+    const interval = setInterval(() => {
+      checkExecution();
+    }, 5000); 
+
+    return () => clearInterval(interval);
   }, []); 
 
   async function checkExecution() {
@@ -23,7 +27,9 @@ function App() {
           smartContractAddress: sc_addr,
         });
 
-        const executed = events.some(event => event.data.includes("Autonomous Execution: This function ran in the future!"));
+        console.log("Fetched Events:", events);
+
+        const executed = events.some(event => event.data.includes("executeInFuture was triggered"));
 
         if (executed) {
           setStatus("Executed! Check logs.");

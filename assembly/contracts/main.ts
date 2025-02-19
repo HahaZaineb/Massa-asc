@@ -2,14 +2,15 @@ import { call, Context, sendMessage, Address, generateEvent } from "@massalabs/m
 
 // Function that will be executed in the future
 export function executeInFuture(): void {
-    console.log("Autonomous Execution: This function ran in the future!");
+    generateEvent("executeInFuture was triggered");
     
 }   
 
 // Function to schedule execution
 export function scheduleExecution(_: StaticArray<u8>): void {
-    let delayInSeconds: u64 = 180; // Change this to set a different delay
-    let executionPeriod: u64 = Context.currentPeriod() + delayInSeconds;
+    let delayInSeconds: u64 = 30;
+    let delayInPeriods: u64 = delayInSeconds / 16; // Convert seconds to periods
+    let executionPeriod: u64 = Context.currentPeriod() + delayInPeriods;
     let executionThread: u8 = Context.currentThread();
 
     sendMessage(
@@ -26,4 +27,5 @@ export function scheduleExecution(_: StaticArray<u8>): void {
         new Address("0"),  // No filter
         new StaticArray<u8>(0) // No filter key
     );
+
 }
