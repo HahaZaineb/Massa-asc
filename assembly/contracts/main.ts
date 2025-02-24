@@ -13,35 +13,32 @@ export function executeInFuture(): void {
   
 // Function to schedule execution
 export function scheduleExecution(_: StaticArray<u8>): void {
-    const delayInSeconds: u64 = 60;
-    const delayInPeriods: u64 = delayInSeconds / 16;
-    const executionPeriod: u64 = Context.currentPeriod() + delayInPeriods;
-    const executionThread: u8 = Context.currentThread();
-    
+    const address = Context.callee();
+    const functionName = 'executeInFuture';
+    const validityStartPeriod = currentPeriod() + 1;
+    const validityStartThread = 0 as u8;
+    const validityEndPeriod = validityStartPeriod;
+    const validityEndThread = 31 as u8;
+
+    const maxGas = 500_000_000; // gas for smart contract execution
+    const rawFee = 200_000;
+    const coins = 0;
+
 
     sendMessage(
-        Context.callee(),  // Target contract (itself)
-        "executeInFuture", // Function to execute
-        executionPeriod,   // When to execute
-        executionThread,   // Thread to use
-        executionPeriod,   // Unique identifier for scheduling
-        executionThread,   // Same thread
-        u64(50_000_000),  //maxgas
-        u64(200_000),     //fee  
-        u64(0),            // No additional coins
-        new StaticArray<u8>(0) // No filter key
-    );
-    //sendMessage(
-      //  address,
-      //  functionName,
-      //  validityStartPeriod,
-      //  validityStartThread,
-      //  validityEndPeriod,
-      //  validityEndThread,
-      //  maxGas,
-      //  rawFee,
-      //  coins,
-      //  []
-      //);
-    
+        address,
+        functionName,
+        validityStartPeriod,
+        validityStartThread,
+        validityEndPeriod,
+        validityEndThread,
+        maxGas,
+        rawFee,
+        coins,
+        [],
+      );
+      generateEvent(
+        `next update planned on period ${validityStartPeriod.toString()} thread: ${validityStartThread.toString()}`,
+      );
+
 }
