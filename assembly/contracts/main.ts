@@ -37,8 +37,6 @@ export function scheduleExecution(_: StaticArray<u8>): void {
         coins,
         [],
       );
-      generateEvent(
-        `next update planned on period ${validityStartPeriod.toString()} thread: ${validityStartThread.toString()}`,
-      );
+     
 
 }
